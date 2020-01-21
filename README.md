@@ -7,7 +7,7 @@ A command line interface to save commands related to a project
 
 
 ```shell
-$ npm install -g clrdo
+$ npm install -g cwi
 ```
 
 ---
