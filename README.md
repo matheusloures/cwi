@@ -20,17 +20,20 @@ $ npm install -g cwi
 $ cwi
 ```
 
+## init
 ### This will generate a file to save the commands on the folder you're running this command. It will generate only if the file doesn't exist.
-
 ```shell
 $ init
 ```
 
+
+## add
+
 ```shell
 $ add
 ```
+### Now every line you type will be saved after you hit enter
 
-### Every line you type will be saved after you hit enter
 
 
 ---
