@@ -1,7 +1,8 @@
-const readline = require('readline');
+#!/usr/bin/env node
 const fs = require('fs');
 const path = require('path');
-console.log('Leave this window open to serve as support.\r\nAdd your commands below.\r\nEnter saves')
+const readline = require('readline');
+console.log('Leave this window open to serve as support.\r\nAdd your commands below.\r\n "init" to generate cwi on the current folder\r\n  "add" to add a new command. Wait for prompt\r\n')
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
@@ -29,14 +30,17 @@ rl.on('line', (line) => {
     }
     break;
     case 'add':
-    rl.question('write your command and hit enter\r\n', (answer) => {
-        var mAnswer = answer;
+
+        console.log('\r\n Every line you hit enter will be added to command_wall.json in your folder\r\n')
+
+        rl.on('line',(line)=>{
+            var mAnswer = line;
 
             if (!fs.existsSync(path.join(b,'/command_wall.json'))) {
                 fs.writeFile(path.join(b,'/command_wall.json'), [], function(err) {
-                if(err) {
-                    console.warn("cwi not initialized, run init first.", err);
-                }
+                    if(err) {
+                        console.warn("cwi not initialized, run init first.", err);
+                    }
                 }); 
                             
             }else{
@@ -45,23 +49,24 @@ rl.on('line', (line) => {
                     var newArr = require(p)
     
                     newArr.push(mAnswer)
-    
-                            write(JSON.stringify(newArr),path.join(b, '/command_wall.json')).then(res=>{
-                
-                                console.log("...Success...");
-                                console.log("Run 'add' again to add more");
-                            },err=>{
-                                console.log("Failed Error #3");
-                            })
+
+                    write(JSON.stringify(newArr),path.join(b, '/command_wall.json')).then(res=>{
+        
+                        console.log("...Success...\r\n");
+                        console.log("");
+                    },err=>{
+                        console.log("Failed Error #3");
+                    })
     
             }
 
-        })
 
+        })
+        
 
     break;
     default:
-      break;
+    break;
   }
   rl.prompt();
 }).on('close', () => {
